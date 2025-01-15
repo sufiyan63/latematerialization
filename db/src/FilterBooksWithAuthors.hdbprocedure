@@ -1,0 +1,33 @@
+PROCEDURE "FilterBooksWithAuthors"(OUT filterBooks TABLE (
+  ID NVARCHAR(36),
+  title NVARCHAR(255),
+  descr NVARCHAR(1000),
+  authorName NVARCHAR(255),
+  genreName NVARCHAR(255),
+  stock INTEGER,
+  price DECIMAL(10, 2),
+  currency_code NVARCHAR(10),
+  image BLOB
+)) 
+  LANGUAGE SQLSCRIPT 
+  SQL SECURITY INVOKER 
+  READS SQL DATA AS 
+BEGIN 
+  -- Select filtered books based on authors with non-null name and dateOfBirth
+  filterBooks = SELECT B.ID,
+    B.title,
+    B.descr,
+    A.name AS authorName,
+    G.name AS genreName,
+    B.stock,
+    B.price,
+    B.currency_code,
+    B.image
+  FROM sap_capire_bookshop_Books AS B
+    INNER JOIN sap_capire_bookshop_Authors AS A
+   ON B.author_ID = A.ID
+    LEFT JOIN sap_capire_bookshop_Genres AS G
+   ON B.genre_ID = G.ID
+  WHERE A.name IS NOT NULL
+    AND A.dateOfBirth IS NOT NULL;
+END

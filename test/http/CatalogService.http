@@ -1,0 +1,38 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### ListOfBooks
+# @name ListOfBooks_GET
+GET {{server}}/odata/v4/catalog/ListOfBooks
+{{auth}}
+
+
+### Books
+# @name Books_GET
+GET {{server}}/odata/v4/catalog/Books
+{{auth}}
+
+
+### Genres
+# @name Genres_GET
+GET {{server}}/odata/v4/catalog/Genres
+{{auth}}
+
+
+### Currencies
+# @name Currencies_GET
+GET {{server}}/odata/v4/catalog/Currencies
+{{auth}}
+
+
+### submitOrder
+# @name submitOrder_POST
+POST {{server}}/odata/v4/catalog/submitOrder
+Content-Type: application/json
+{{auth}}
+
+{
+  "book": 31106534,
+  "quantity": 43
+}

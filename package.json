@@ -1,0 +1,37 @@
+{
+	"name": "latematerialization",
+	"version": "1.0.0",
+	"description": "A simple CAP project.",
+	"repository": "<Add your repository here>",
+	"license": "UNLICENSED",
+	"private": true,
+	"dependencies": {
+		"@cap-js/hana": "^1",
+		"@cap-js/telemetry": "^1.1.2",
+		"@sap/cds": "^8",
+		"express": "^4"
+	},
+	"devDependencies": {
+		"@cap-js/cds-types": "^0.8.0",
+		"@cap-js/sqlite": "^1",
+		"@sap/dev-cap-tools": "^1.31.0"
+	},
+	"scripts": {
+		"start": "cds-serve",
+		"run": "cds run"
+	},
+	"sapux": [
+		"app/admin-books",
+		"app/browse"
+	],
+	"cds": {
+		"requires": {
+			"db": {
+				"kind": "hana"
+			}
+		},
+		"sql": {
+			"native_hana_associations": false
+		}
+	}
+}
